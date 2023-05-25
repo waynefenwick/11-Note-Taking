@@ -1,3 +1,21 @@
+const express = require('express'); // getting the 'express' module and identifying it as express
+const path = require('path'); // getting the 'path' module and identifying it as path
+const { prototype } = require('stream');
+
+const app = express(); // express to now be identified as app
+const PORT = 3001; // port through which data will be (req)uested and (rec)eived
+
+// Defines the route for GET /notes
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'notes.html'));
+});
+
+// Starts the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}}`);
+});
+
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
