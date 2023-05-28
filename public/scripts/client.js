@@ -7,7 +7,6 @@ let newNoteBtn;
 let noteList;
 let listContainer; // Declare listContainer variable
 
-
 if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.html') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -81,7 +80,6 @@ const handleNoteSave = () => {
     renderActiveNote();
   });
 };
-
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
@@ -196,7 +194,4 @@ if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.
   listContainer.addEventListener('click', handleNoteDelete); // Add this line
 }
 
-
-
 getAndRenderNotes();
-
