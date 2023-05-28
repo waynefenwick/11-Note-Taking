@@ -48,14 +48,18 @@ Currently the application is used in a local environment. Clone the repository.
 _A brief overview of the project build_
 &nbsp;
 
-![Media](./media/Homepage.png)
-![Media](./media/EnteredNotes.png)
-![Media](./media/ViewingNotes.png)
-![Media](./media/SaveBtn.png)
+![Media](./media/Homepage.png)&nbsp;
+
+![Media](./media/EnteredNotes.png)&nbsp;
+
+![Media](./media/ViewingNotes.png)&nbsp;
+
+![Media](./media/SaveBtn.png)&nbsp;
+
 ![Media](./media/DeletingNotes.png)
 
 
-* Visit [Heroku](https://) to see more details
+* Visit [Heroku](https://git.heroku.com/challenge-11-note-taking.git) to see more details
 
 &nbsp;
 
