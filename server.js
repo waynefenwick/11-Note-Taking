@@ -1,8 +1,8 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const uuid = require('./helper/uuid');
-const cors = require ('cors');
+const express = require('express'); // framework with features and utilities for building web apps
+const path = require('path'); // node.js module that works with directory paths
+const fs = require('fs'); // 'file system' node.js module that offers file management functions
+const uuid = require('./helper/uuid'); // module that assigns 'universal unique identifiers' to saved notes
+const cors = require ('cors'); // a middleware module that enables cross-origin communication and resource sharing between different domains.
 
 const app = express();
 const PORT = 3001;
@@ -75,7 +75,7 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id;
 
-  // Read the db.json file
+  // Reads the db.json file
   fs.readFile(path.join(__dirname, 'db', 'db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -86,14 +86,14 @@ app.delete('/api/notes/:id', (req, res) => {
       const notes = JSON.parse(data);
       const updatedNotes = notes.filter((note) => note.id !== noteId);
 
-      // Write the updated notes array to the db.json file
-      fs.writeFile(path.join(__dirname, 'db', 'db.json'), JSON.stringify(updatedNotes), 'utf8', (err) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).json({ error: 'Failed to delete note.' });
-        }
+  // Write the updated notes array to the db.json file
+  fs.writeFile(path.join(__dirname, 'db', 'db.json'), JSON.stringify(updatedNotes), 'utf8', (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to delete note.' });
+    }
 
-        res.sendStatus(204); // No content response (note successfully deleted)
+      res.sendStatus(204);
       });
     } catch (error) {
       console.error(error);
@@ -102,8 +102,7 @@ app.delete('/api/notes/:id', (req, res) => {
   });
 });
 
-
-// Start the server
+// Starts the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

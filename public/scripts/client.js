@@ -5,29 +5,31 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-let listContainer; // Declare listContainer variable
+let listContainer;
 
+// Pathway to notes.html elements
 if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.html') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note-btn');
   newNoteBtn = document.querySelector('.new-note-btn');
-  listContainer = document.querySelector('.list-container .list-group'); // Assign listContainer
+  listContainer = document.querySelector('.list-container .list-group');
 }
 
-// Show an element
+// Shows an element
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
-// Hide an element
+// Hides an element
 const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// activeNote is used to keep track of the note in the textarea
+// Keeps track of the note in the textarea
 let activeNote = {};
 
+// Path to GET note from JSON db
 const getNotes = () =>
   fetch('http://127.0.0.1:3001/api/notes', {
     method: 'GET',
@@ -36,7 +38,7 @@ const getNotes = () =>
     },
   });
 
-
+// Path to POST (save) note to JSON db
 const saveNote = (note) =>
   fetch('http://127.0.0.1:3001/api/notes', {
     method: 'POST',
@@ -46,6 +48,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
+// Path to DELETE note from JSON db
 const deleteNote = (id) =>
   fetch(`http://127.0.0.1:3001/api/notes/${id}`, {
     method: 'DELETE',
@@ -54,14 +57,16 @@ const deleteNote = (id) =>
     },
   });
 
+// Selected saved note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
-
+  // If note is selected, is displayed in read only
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
+  // else, Note Title and Note Text fields are empty  
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
@@ -70,6 +75,7 @@ const renderActiveNote = () => {
   }
 };
 
+// Saves the note to the notesLIst
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -81,9 +87,9 @@ const handleNoteSave = () => {
   });
 };
 
-// Delete the clicked note
+// Deletes the note selected to be deleted
 const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
+// Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
   if (e.target.classList.contains('delete-note')) {
@@ -117,6 +123,7 @@ const handleNewNoteView = (e) => {
   renderActiveNote();
 };
 
+// If no note text, the the save button is hidden
 const handleRenderSaveBtn = () => {
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     console.log('Hiding save button');
@@ -127,8 +134,9 @@ const handleRenderSaveBtn = () => {
   }
 };
 
-// Create a list item element for a note
+// Create a list item element for notes saved
 const createLi = (note) => {
+
   const listItem = document.createElement('li');
   listItem.classList.add('list-group-item');
 
@@ -143,6 +151,7 @@ const createLi = (note) => {
   deleteIcon.setAttribute('data-note-id', note.id);
 
   noteTitleContainer.appendChild(noteTitle);
+
   noteTitleContainer.appendChild(deleteIcon);
 
   listItem.appendChild(noteTitleContainer);
@@ -150,11 +159,11 @@ const createLi = (note) => {
   return listItem;
 };
 
+
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   const listContainer = document.querySelector('.list-container');
 
-  // Clear the note list container
   listContainer.innerHTML = '';
 
   if (jsonNotes.length === 0) {
@@ -183,7 +192,7 @@ const renderNoteList = async (notes) => {
   listContainer.addEventListener('click', handleNoteView);
 };
 
-// Gets notes from the db and renders them to the sidebar
+// Gets notes from the db and renders them to the noteList container
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.html') {
@@ -191,7 +200,7 @@ if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
-  listContainer.addEventListener('click', handleNoteDelete); // Add this line
+  listContainer.addEventListener('click', handleNoteDelete);
 }
 
 getAndRenderNotes();
