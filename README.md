@@ -59,7 +59,7 @@ _A brief overview of the project build_
 ![Media](./media/DeletingNotes.png)
 
 
-* Visit [Heroku](https://git.heroku.com/challenge-11-note-taking.git) to see more details
+* Visit [Heroku](https://challenge-11-note-taking.herokuapp.com/) to see more details
 
 &nbsp;
 

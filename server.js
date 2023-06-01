@@ -5,7 +5,7 @@ const uuid = require('./helper/uuid'); // module that assigns 'universal unique 
 const cors = require ('cors'); // a middleware module that enables cross-origin communication and resource sharing between different domains.
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001; // Must use this with Heroku
 
 // Set the public folder as a static directory
 app.use(express.static('public'));
