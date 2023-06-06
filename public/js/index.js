@@ -1,4 +1,4 @@
-console.log('I am Loading');
+console.log('I have Loaded');
 
 let noteTitle;
 let noteText;
@@ -8,7 +8,7 @@ let noteList;
 let listContainer;
 
 // Pathway to notes.html elements
-if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.html') {
+if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
   saveNoteBtn = document.querySelector('.save-note-btn');
@@ -16,12 +16,10 @@ if (window.location.pathname === '/Class-Challenges/11-Note-Taking/public/notes.
   listContainer = document.querySelector('.list-container .list-group');
 }
 
-// Shows an element
+// Shows & hide elements
 const show = (elem) => {
   elem.style.display = 'inline';
 };
-
-// Hides an element
 const hide = (elem) => {
   elem.style.display = 'none';
 };
@@ -29,28 +27,24 @@ const hide = (elem) => {
 // Keeps track of the note in the textarea
 let activeNote = {};
 
-// Path to GET note from JSON db
+// GET, POST and DELETE nots from db.json
 const getNotes = () =>
-  fetch('http://127.0.0.1:3001/api/notes', {
+  fetch('/api/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   });
-
-// Path to POST (save) note to JSON db
 const saveNote = (note) =>
-  fetch('http://127.0.0.1:3001/api/notes', {
+  fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
   });
-
-// Path to DELETE note from JSON db
 const deleteNote = (id) =>
-  fetch(`http://127.0.0.1:3001/api/notes/${id}`, {
+  fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -125,6 +119,8 @@ const handleNewNoteView = (e) => {
 
 // If no note text, the the save button is hidden
 const handleRenderSaveBtn = () => {
+  console.log('handleRenderSaveBtn called');
+
   if (!noteTitle.value.trim() || !noteText.value.trim()) {
     console.log('Hiding save button');
     hide(saveNoteBtn);
