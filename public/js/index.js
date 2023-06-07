@@ -5,7 +5,6 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-let listContainer;
 
 // Pathway to notes.html elements
 console.log('pathname:', window.location.pathname);
@@ -15,7 +14,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group-item');
-}
+};
 
 // Shows & hide elements
 const show = (elem) => {
