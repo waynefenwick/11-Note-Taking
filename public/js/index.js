@@ -1,4 +1,4 @@
-console.log('Server is running and listening to the port');
+console.log('Server is running and listening to the port!');
 
 let noteTitle;
 let noteText;
