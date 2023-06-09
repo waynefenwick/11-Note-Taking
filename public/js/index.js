@@ -15,7 +15,7 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelector('.list-container .list-group');
 }
 
-// Shows & hide elements
+// Shows & hides elements
 const show = (elem) => {
   elem.style.display = 'inline';
 };
@@ -52,7 +52,7 @@ const deleteNote = (id) =>
     },
   });
 
-// Selected saved note
+// Saved notes
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   // If note is selected, is displayed in read only
@@ -106,6 +106,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
+// Deletes selected note
 const handleNoteDelete = (e) => {
   e.stopPropagation();
 
@@ -115,7 +116,6 @@ const handleNoteDelete = (e) => {
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-
   deleteNote(noteId)
     .then(() => {
       getAndRenderNotes();
@@ -154,26 +154,24 @@ const createLi = (text, delBtn = true) => {
   return liEl;
 };
 
-// Render the list of note titles
+// Renders the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
-    noteList.innerHTML = ''; // Clear the existing content
+    noteList.innerHTML = '';
   }
-
   if (jsonNotes.length === 0) {
     const emptyNoteLi = createLi('No saved Notes', false);
-    noteList.append(emptyNoteLi); // Append the empty note element to the noteList
+    noteList.append(emptyNoteLi);
   }
-
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
-    noteList.append(li); // Append each note element to the noteList
+    noteList.append(li);
   });
 };
 
-// Gets notes from the db and renders them to the sidebar
+// Gets notes from the db and renders them to the notes list
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
@@ -184,4 +182,3 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
-

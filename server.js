@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
 
-// Use the routes defined in the separate file
+// Use the routes defined in routes
 app.use('/', routes);
 
 app.listen(PORT, () => {

@@ -4,7 +4,7 @@ const path = require('path');
 
 const router = express.Router();
 
-// Gets route for homepage
+// Sets route for homepage
 router.get('/', (req, res) => {
      res.sendFile(path.join(__dirname, '..', 'index.html'), {
           headers: {
@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
      });
 });
 
+// Sets route for 'notes' page
 router.get('/notes', (req, res) => {
      res.sendFile(path.join(__dirname, '..', 'notes.html'), {
           headers: {
@@ -21,14 +22,15 @@ router.get('/notes', (req, res) => {
      });
 });
 
-// Serve the CSS file with the correct MIME type
+// Sets route for styles
 router.get('/css/styles.css', (req, res) => {
      res.sendFile(path.join(__dirname, '..', 'css', 'styles.css'));
 });
 
-// Gets notes stored in db.json
+// Sets route to stored data in db.json
 const notesFilePath = path.join(__dirname, '..', '..', 'db', 'db.json');
 
+// GET saved data
 router.get('/api/notes', (req, res) => {
      console.log('GET Called');
      fs.readFile(notesFilePath, 'utf8', (err, data) => {
@@ -46,9 +48,10 @@ router.get('/api/notes', (req, res) => {
      });
 });
 
-// Posts or adds notes to db.json
+// Adds a unique id to each posted piece of data
 const { v4: uuidv4 } = require('uuid');
 
+// POST (save) data
 router.post('/api/notes', (req, res) => {
      fs.readFile(notesFilePath, 'utf8', (err, data) => {
           if (err) {
@@ -76,8 +79,7 @@ router.post('/api/notes', (req, res) => {
      });
 });
 
-
-// Deletes notes from db.json
+// DELETE posted data
 router.delete('/api/notes/:id', (req, res) => {
      const noteId = req.params.id;
      fs.readFile(notesFilePath, 'utf8', (err, data) => {
@@ -101,6 +103,5 @@ router.delete('/api/notes/:id', (req, res) => {
           }
      });
 });
-
 
 module.exports = router;
