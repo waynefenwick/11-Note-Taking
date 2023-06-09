@@ -48,15 +48,15 @@ Currently the application is used in a local environment. Clone the repository.
 _A brief overview of the project build_
 &nbsp;
 
-![Media](./media/Homepage.png)&nbsp;
+![Media](./public/media/Homepage.png)&nbsp;
 
-![Media](./media/EnteredNotes.png)&nbsp;
+![Media](./public/media/EnteredNotes.png)&nbsp;
 
-![Media](./media/ViewingNotes.png)&nbsp;
+![Media](./public/media/ViewingNotes.png)&nbsp;
 
-![Media](./media/SaveBtn.png)&nbsp;
+![Media](./public/media/SaveBtn.png)&nbsp;
 
-![Media](./media/DeletingNotes.png)
+![Media](./public/media/DeletingNotes.png)
 
 
 * Visit [Heroku](https://challenge-11-note-taking.herokuapp.com/) to see more details
