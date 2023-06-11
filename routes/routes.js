@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Sets route for homepage
 router.get('/', (req, res) => {
-     res.sendFile(path.join(__dirname, '..', 'index.html'), {
+     res.sendFile(path.join(__dirname, '..', '..', 'index.html'), {
           headers: {
                'Content-Type': 'text/html',
           },
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 
 // Sets route for 'notes' page
 router.get('/notes', (req, res) => {
-     res.sendFile(path.join(__dirname, '..', 'notes.html'), {
+     res.sendFile(path.join(__dirname, '..', 'public', 'notes.html'), {
           headers: {
                'Content-Type': 'text/html',
           },
@@ -24,11 +24,11 @@ router.get('/notes', (req, res) => {
 
 // Sets route for styles
 router.get('/css/styles.css', (req, res) => {
-     res.sendFile(path.join(__dirname, '..', 'css', 'styles.css'));
+     res.sendFile(path.join(__dirname, '..', '..', 'css', 'styles.css'));
 });
 
 // Sets route to stored data in db.json
-const notesFilePath = path.join(__dirname, '..', '..', 'db', 'db.json');
+const notesFilePath = path.join(__dirname, '..', 'db', 'db.json');
 
 // GET saved data
 router.get('/api/notes', (req, res) => {
